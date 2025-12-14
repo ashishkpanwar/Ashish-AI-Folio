@@ -7,3 +7,8 @@ public interface IAiClient
         string userPrompt,
         CancellationToken cancellationToken);
 }
+
+public interface IDateTimeProvider
+{
+    DateTime UtcNow { get; }
+}
