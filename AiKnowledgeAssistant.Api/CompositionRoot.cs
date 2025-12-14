@@ -1,7 +1,7 @@
 ﻿using AiKnowledgeAssistant.Application.AI;
 using AiKnowledgeAssistant.Application.Rag.Implementation;
 using AiKnowledgeAssistant.Application.Rag.Interface;
-using AiKnowledgeAssistant.Application.Search;
+using AiKnowledgeAssistant.Application.Search.Interface;
 using AiKnowledgeAssistant.Infrastructure.AI;
 using AiKnowledgeAssistant.Infrastructure.Search;
 using Azure;

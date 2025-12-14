@@ -1,5 +1,5 @@
 ﻿using AiKnowledgeAssistant.Application.AI;
-using AiKnowledgeAssistant.Application.Search;
+using AiKnowledgeAssistant.Application.Search.Interface;
 using AiKnowledgeAssistant.Tests.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System.Numerics;

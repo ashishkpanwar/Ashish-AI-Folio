@@ -1,4 +1,6 @@
-﻿namespace AiKnowledgeAssistant.Application.Search;
+﻿using AiKnowledgeAssistant.Application.Search.Models;
+
+namespace AiKnowledgeAssistant.Application.Search.Interface;
 
 public interface IVectorSearchStore
 {
@@ -10,7 +12,7 @@ public interface IVectorSearchStore
         int chunkIndex,
         CancellationToken cancellationToken);
 
-    Task<IReadOnlyList<string>> SearchAsync(
+    Task<IReadOnlyList<VectorSearchResult>> SearchAsync(
         float[] queryVector,
         int topK,
         CancellationToken cancellationToken);

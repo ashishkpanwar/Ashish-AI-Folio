@@ -1,4 +1,5 @@
-﻿using AiKnowledgeAssistant.Application.Search;
+﻿using AiKnowledgeAssistant.Application.Search.Interface;
+using AiKnowledgeAssistant.Application.Search.Models;
 using Azure;
 using Azure.Search.Documents;
 using Azure.Search.Documents.Models;
@@ -31,11 +32,11 @@ namespace AiKnowledgeAssistant.Infrastructure.Search
                 chunkIndex
             };
 
-            var result = await _searchClient.UploadDocumentsAsync(
+            await _searchClient.UploadDocumentsAsync(
                 new[] { document }, cancellationToken :cancellationToken);
         }
 
-        public async Task<IReadOnlyList<string>> SearchAsync(
+        public async Task<IReadOnlyList<VectorSearchResult>> SearchAsync(
         float[] queryVector,
         int topK,
         CancellationToken cancellationToken)
@@ -60,11 +61,14 @@ namespace AiKnowledgeAssistant.Infrastructure.Search
                 options,
                 cancellationToken);
 
-            var matches = new List<string>();
+            var matches = new List<VectorSearchResult>();
 
             await foreach (var result in results.Value.GetResultsAsync())
             {
-                matches.Add(result.Document["content"].ToString());
+                matches.Add(new VectorSearchResult (
+                    result.Document["content"]!.ToString()!,
+                    result.Score ?? 0.0
+                ));
             }
 
             return matches;
