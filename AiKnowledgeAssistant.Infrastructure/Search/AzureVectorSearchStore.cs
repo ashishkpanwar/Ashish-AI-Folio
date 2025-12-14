@@ -31,7 +31,7 @@ namespace AiKnowledgeAssistant.Infrastructure.Search
                 chunkIndex
             };
 
-            await _searchClient.UploadDocumentsAsync(
+            var result = await _searchClient.UploadDocumentsAsync(
                 new[] { document }, cancellationToken :cancellationToken);
         }
 
@@ -46,12 +46,12 @@ namespace AiKnowledgeAssistant.Infrastructure.Search
                 VectorSearch = new()
                 {
                     Queries =
-            {
-                new VectorizedQuery(queryVector)
-                {
-                    Fields = { "contentVector" }
-                }
-            }
+                    {
+                        new VectorizedQuery(queryVector)
+                        {
+                            Fields = { "contentVector" }
+                        }
+                    }
                 }
             };
 

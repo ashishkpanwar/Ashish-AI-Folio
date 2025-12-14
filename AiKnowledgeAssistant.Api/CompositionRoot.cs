@@ -1,4 +1,6 @@
 ﻿using AiKnowledgeAssistant.Application.AI;
+using AiKnowledgeAssistant.Application.Rag.Implementation;
+using AiKnowledgeAssistant.Application.Rag.Interface;
 using AiKnowledgeAssistant.Application.Search;
 using AiKnowledgeAssistant.Infrastructure.AI;
 using AiKnowledgeAssistant.Infrastructure.Search;
@@ -51,6 +53,8 @@ namespace AiKnowledgeAssistant.Api
             services.AddSingleton<IAiClient, AzureOpenAiClient>();
             services.AddSingleton<IAiEmbeddingClient, AzureOpenAiEmbeddingClient>();
             services.AddSingleton<IVectorSearchStore, AzureVectorSearchStore>();
+            services.AddSingleton<IRagService, RagService>();
+
         }
     }
 
