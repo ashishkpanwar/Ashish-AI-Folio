@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11217.181 d18.0
+VisualStudioVersion = 18.0.11217.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiKnowledgeAssistant.Api", "AiKnowledgeAssistant.Api\AiKnowledgeAssistant.Api.csproj", "{02365143-A833-1C76-ADD2-19FFA18F8071}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiKnowledgeAssistant.Domain", "AiKnowledgeAssistant.Domain\AiKnowledgeAssistant.Domain.csproj", "{2DBA8A22-AF87-460A-4324-17A2E54A9A86}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiKnowledgeAssistant.Infrastructure", "AiKnowledgeAssistant.Infrastructure\AiKnowledgeAssistant.Infrastructure.csproj", "{E777A105-954D-1615-C975-976656BCA382}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{98B0670B-C06E-4650-8B20-7B5A8C49DE5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiKnowledgeAssistant.Tests", "AiKnowledgeAssistant.Tests\AiKnowledgeAssistant.Tests.csproj", "{F308509D-90F3-4D12-B558-10198B42C55F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{E777A105-954D-1615-C975-976656BCA382}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E777A105-954D-1615-C975-976656BCA382}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E777A105-954D-1615-C975-976656BCA382}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B0670B-C06E-4650-8B20-7B5A8C49DE5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B0670B-C06E-4650-8B20-7B5A8C49DE5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B0670B-C06E-4650-8B20-7B5A8C49DE5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B0670B-C06E-4650-8B20-7B5A8C49DE5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F308509D-90F3-4D12-B558-10198B42C55F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F308509D-90F3-4D12-B558-10198B42C55F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F308509D-90F3-4D12-B558-10198B42C55F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F308509D-90F3-4D12-B558-10198B42C55F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
