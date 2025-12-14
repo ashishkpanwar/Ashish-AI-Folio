@@ -2,18 +2,11 @@ using AiKnowledgeAssistant.Application.AI;
 using AiKnowledgeAssistant.Infrastructure.AI;
 using Azure;
 using Azure.AI.OpenAI;
-using OpenAI.Chat;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.ConfigureLogging(logging =>
-{
-    logging.ClearProviders();
-    logging.AddConsole();
-    logging.AddDebug();
-    // Add Application Insights, Serilog, etc.
-});
+builder.Logging.ClearProviders().AddConsole().AddDebug();
 
 
 builder.Services.AddControllers();
@@ -31,12 +24,21 @@ builder.Services.AddSingleton(sp =>
 builder.Services.AddSingleton(sp =>
 {
     var azureClient = sp.GetRequiredService<AzureOpenAIClient>();
+    var deployment = builder.Configuration["AzureOpenAI:EmbeddingDeployment"]!;
+    return azureClient.GetEmbeddingClient(deployment);
+});
+
+builder.Services.AddSingleton(sp =>
+{
+    var azureClient = sp.GetRequiredService<AzureOpenAIClient>();
     var chatDeployment = builder.Configuration["AzureOpenAI:ChatDeployment"]!;
     return azureClient.GetChatClient(chatDeployment);
 });
 
 
 builder.Services.AddSingleton<IAiClient, AzureOpenAiClient>();
+builder.Services.AddSingleton<IAiEmbeddingClient, AzureOpenAiEmbeddingClient>();
+
 
 
 var app = builder.Build();
