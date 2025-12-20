@@ -55,6 +55,7 @@ namespace AiKnowledgeAssistant.Api
             services.AddSingleton<IAiEmbeddingClient, AzureOpenAiEmbeddingClient>();
             services.AddScoped<IFailureVectorStore, FailureVectorSearchStore>();
             services.AddSingleton<IFailureRetrievalService, FailureRetrievalService>();
+            services.AddSingleton<IFailureInsightBuilder, FailureInsightBuilder>();
             services.AddSingleton<ITokenGuardrail, DefaultTokenGuardrail>();
             services.AddSingleton<IFailureExplanationService, FailureExplanationService>();
 
