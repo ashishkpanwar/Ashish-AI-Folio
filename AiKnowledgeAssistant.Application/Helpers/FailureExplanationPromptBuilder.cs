@@ -12,17 +12,24 @@ namespace AiKnowledgeAssistant.Application.Helpers
             return $"""
             You are an assistant helping engineers understand job failures.
 
-            Known failure: {insight.IsKnownFailure}
-            Current severity: {insight.CurrentSeverity}
-            Historical severity range: {insight.MinSeverityObserved}–{insight.MaxSeverityObserved}
-            Occurrence count: {insight.OccurrenceCount}
-            Last seen: {insight.LastSeenAt}
-            Active failures present: {insight.HasActiveFailures}
+            Failure summary:
+            - Known failure: {insight.IsKnownFailure}
+            - Current severity: {insight.CurrentSeverity}
+            - Historical severity range: {insight.MinSeverityObserved}–{insight.MaxSeverityObserved}
+            - Occurrence count: {insight.OccurrenceCount}
+            - Last seen: {insight.LastSeenAt}
+            - Active failures present: {insight.HasActiveFailures}
 
-            Explain what this means operationally.
-            Avoid speculation. Do not invent causes.
+
+            Rules:
+            - Answer only using the failure summary
+            - Do not invent causes
+            - Do not speculate beyond the data
+            - Be concise and operational
+            - If information is insufficient, say so
             """;
         }
     }
+
 
 }

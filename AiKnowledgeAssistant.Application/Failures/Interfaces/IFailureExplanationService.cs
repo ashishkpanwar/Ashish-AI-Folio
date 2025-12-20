@@ -9,6 +9,7 @@ namespace AiKnowledgeAssistant.Application.Failures.Interfaces
     {
         Task<FailureExplanationResult> ExplainAsync(
             FailureInsight insight,
+            string question,
             CancellationToken cancellationToken);
     }
 }

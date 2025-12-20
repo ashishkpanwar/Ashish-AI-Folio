@@ -21,12 +21,12 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
         }
 
         public async Task<FailureAnalysisResult> AnalyzeAsync(
-            FindSimilarFailuresQuery query,
+            FailureAnalysisRequest request,
             CancellationToken cancellationToken)
         {
             // 1️
             var failures = await _retrievalService.FindSimilarAsync(
-                query,
+                request.SimilarFailures,
                 cancellationToken);
 
             // 2️ Deterministic insights
@@ -35,6 +35,7 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
             // 3️ Optional AI explanation (guarded internally)
             var explanation = await _explanationService.ExplainAsync(
                 insight,
+                request.Question ?? string.Empty,
                 cancellationToken);
 
             return new FailureAnalysisResult

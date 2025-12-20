@@ -1,4 +1,5 @@
 ﻿using AiKnowledgeAssistant.Application.Failures.Interfaces;
+using AiKnowledgeAssistant.Application.Failures.Models;
 using AiKnowledgeAssistant.Application.Failures.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,11 +18,11 @@ namespace AiKnowledgeAssistant.Api.Controllers
 
         [HttpPost("analyze")]
         public async Task<IActionResult> Analyze(
-        [FromBody] FindSimilarFailuresQuery query,
+        [FromBody] FailureAnalysisRequest request,
         CancellationToken cancellationToken)
         {
             var result = await _analysisService.AnalyzeAsync(
-                query,
+                request,
                 cancellationToken);
 
             return Ok(result);

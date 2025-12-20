@@ -7,7 +7,7 @@ namespace AiKnowledgeAssistant.Application.Failures.Interfaces
     public interface IFailureAnalysisService
     {
         Task<FailureAnalysisResult> AnalyzeAsync(
-            FindSimilarFailuresQuery query,
+            FailureAnalysisRequest request,
             CancellationToken cancellationToken);
     }
 
