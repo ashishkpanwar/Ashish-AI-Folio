@@ -1,5 +1,7 @@
-﻿using AiKnowledgeAssistant.Application.AI;
+﻿using AiKnowledgeAssistant.Application.AI.Implementations;
+using AiKnowledgeAssistant.Application.AI.Interfaces;
 using AiKnowledgeAssistant.Application.Failures;
+using AiKnowledgeAssistant.Application.Failures.Implementations;
 using AiKnowledgeAssistant.Application.Failures.Interfaces;
 using AiKnowledgeAssistant.Infrastructure.AI;
 using AiKnowledgeAssistant.Infrastructure.Search;
@@ -53,6 +55,8 @@ namespace AiKnowledgeAssistant.Api
             services.AddSingleton<IAiEmbeddingClient, AzureOpenAiEmbeddingClient>();
             services.AddScoped<IFailureVectorStore, FailureVectorSearchStore>();
             services.AddSingleton<IFailureRetrievalService, FailureRetrievalService>();
+            services.AddSingleton<ITokenGuardrail, DefaultTokenGuardrail>();
+            services.AddSingleton<IFailureExplanationService, FailureExplanationService>();
 
         }
     }

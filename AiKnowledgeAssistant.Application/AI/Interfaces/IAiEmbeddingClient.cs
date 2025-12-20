@@ -1,4 +1,4 @@
-﻿namespace AiKnowledgeAssistant.Application.AI;
+﻿namespace AiKnowledgeAssistant.Application.AI.Interfaces;
 
 public interface IAiEmbeddingClient
 {

@@ -27,4 +27,8 @@
     <ProjectReference Include="..\AiKnowledgeAssistant.Infrastructure\AiKnowledgeAssistant.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+
 </Project>

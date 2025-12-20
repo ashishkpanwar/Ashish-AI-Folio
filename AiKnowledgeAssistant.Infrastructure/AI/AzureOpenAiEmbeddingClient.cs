@@ -1,4 +1,4 @@
-﻿using AiKnowledgeAssistant.Application.AI;
+﻿using AiKnowledgeAssistant.Application.AI.Interfaces;
 using OpenAI.Embeddings;
 
 namespace AiKnowledgeAssistant.Infrastructure.AI;

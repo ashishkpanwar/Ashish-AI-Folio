@@ -1,9 +1,9 @@
-﻿using AiKnowledgeAssistant.Application.AI;
-using AiKnowledgeAssistant.Infrastructure.Resilience;
+﻿using AiKnowledgeAssistant.Infrastructure.Resilience;
 using Azure.AI.OpenAI;
 using OpenAI.Chat;
 using Polly;
 using Microsoft.Extensions.Logging;
+using AiKnowledgeAssistant.Application.AI.Interfaces;
 
 
 namespace AiKnowledgeAssistant.Infrastructure.AI;

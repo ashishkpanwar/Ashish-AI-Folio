@@ -1,6 +1,6 @@
 ﻿using AiKnowledgeAssistant.Api.Dtos.Request;
 using AiKnowledgeAssistant.Api.Dtos.Response;
-using AiKnowledgeAssistant.Application.AI;
+using AiKnowledgeAssistant.Application.AI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AiKnowledgeAssistant.Api.Controllers

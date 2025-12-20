@@ -1,4 +1,4 @@
-﻿using AiKnowledgeAssistant.Application.AI;
+﻿using AiKnowledgeAssistant.Application.AI.Interfaces;
 using AiKnowledgeAssistant.Application.Failures.Interfaces;
 using AiKnowledgeAssistant.Application.Failures.Models;
 using AiKnowledgeAssistant.Application.Failures.Queries;
@@ -37,6 +37,14 @@ public sealed class FailureRetrievalService : IFailureRetrievalService
 
     private static string BuildFilter(FindSimilarFailuresQuery query)
     {
+
+        //Supported Operators in Azure Search Filters
+        //eq Equal to => price eq 100
+        //ne Not equal to    => category ne 'books'
+        //gt Greater than => rating gt 4
+        //ge Greater than or equal => date ge 2025 - 01 - 01T00: 00:00Z
+        //lt  Less than  => price lt 50
+        //le Less than or equal => stock le 10
         var filters = new List<string>
         {
             $"environment eq '{query.Environment}'",
