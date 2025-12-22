@@ -1,4 +1,4 @@
-namespace AiKnowledgeAssistant.Ingestion.Application.Normalization;
+namespace AiKnowledgeAssistant.Ingestion.Application.Abstractions;
 
 using AiKnowledgeAssistant.Ingestion.Application.Models;
 
