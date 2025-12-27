@@ -1,9 +1,5 @@
-﻿using AiKnowledgeAssistant.Application.AI;
-using AiKnowledgeAssistant.Application.Failures.Interfaces;
+﻿using AiKnowledgeAssistant.Application.Failures.Interfaces;
 using AiKnowledgeAssistant.Application.Failures.Queries;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Xunit;
 
 namespace AiKnowledgeAssistant.Tests.Failures
 {
@@ -24,10 +20,10 @@ namespace AiKnowledgeAssistant.Tests.Failures
         {
             // Arrange
             var query = new FindSimilarFailuresQuery(
-                Content: "database timeout while processing job",
                 Environment: "Prod",
-                ServiceName: "JobWorker",
+                JobId: "1000",
                 MinSeverity: 3,
+                Question: "How to fix job worker failures?",
                 OnlyActive: true,
                 Top: 5);
 
@@ -42,7 +38,7 @@ namespace AiKnowledgeAssistant.Tests.Failures
 
             Assert.Contains(results, f =>
                 f.Environment == "Prod" &&
-                f.ServiceName == "JobWorker" &&
+                f.JobId == "1000" &&
                 f.IsActive &&
                 f.Severity >= 3);
         }

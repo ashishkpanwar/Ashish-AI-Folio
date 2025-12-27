@@ -17,12 +17,14 @@ namespace AiKnowledgeAssistant.Tests.Failures
             new()
             {
                 Severity = 3,
+                JobId="1001",
                 IsActive = true,
                 Timestamp = DateTimeOffset.UtcNow.AddHours(-2)
             },
             new()
             {
                 Severity = 5,
+                JobId="1000",
                 IsActive = false,
                 Timestamp = DateTimeOffset.UtcNow
             }

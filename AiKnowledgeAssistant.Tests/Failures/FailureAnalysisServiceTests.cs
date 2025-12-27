@@ -2,6 +2,7 @@
 using AiKnowledgeAssistant.Application.Failures.Interfaces;
 using AiKnowledgeAssistant.Application.Failures.Models;
 using AiKnowledgeAssistant.Application.Failures.Queries;
+using Azure.Core;
 using Moq;
 using Xunit;
 
@@ -26,11 +27,19 @@ namespace AiKnowledgeAssistant.Tests.Failures
         public async Task AnalyzeAsync_returns_insight_and_explanation_when_ai_runs()
         {
             // Arrange
-            var query = CreateQuery();
+            var request = CreateQuery();
+
+            var query = new FindSimilarFailuresQuery(
+                    Environment: request.Environment,
+                    JobId: request.JobId,
+                    MinSeverity: request.MinSeverity,
+                    OnlyActive: request.OnlyActive,
+                    Question: request.Question
+                );
 
             var failures = new List<FailureRecord>
             {
-                new() { Severity = 3 }
+                new() { Severity = 3, JobId = "1000" }
             };
 
             var insight = new FailureInsight
@@ -43,7 +52,7 @@ namespace AiKnowledgeAssistant.Tests.Failures
                 "This is a known failure with moderate severity.");
 
             _retrievalService
-                .Setup(r => r.FindSimilarAsync(query.SimilarFailures, It.IsAny<CancellationToken>()))
+                .Setup(r => r.FindSimilarAsync(query, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(failures);
 
             _insightBuilder
@@ -57,7 +66,7 @@ namespace AiKnowledgeAssistant.Tests.Failures
             var sut = CreateSut();
 
             // Act
-            var result = await sut.AnalyzeAsync(query, CancellationToken.None);
+            var result = await sut.AnalyzeAsync(request, CancellationToken.None);
 
             // Assert
             Assert.Same(insight, result.Insight);
@@ -69,11 +78,20 @@ namespace AiKnowledgeAssistant.Tests.Failures
         public async Task AnalyzeAsync_returns_insight_when_ai_is_skipped()
         {
             // Arrange
-            var query = CreateQuery();
+            // Arrange
+            var request = CreateQuery();
+
+            var query = new FindSimilarFailuresQuery(
+                    Environment: request.Environment,
+                    JobId: request.JobId,
+                    MinSeverity: request.MinSeverity,
+                    OnlyActive: request.OnlyActive,
+                    Question: request.Question
+                );
 
             var failures = new List<FailureRecord>
         {
-            new() { Severity = 2 }
+            new() { Severity = 2, JobId="1001" }
         };
 
             var insight = new FailureInsight
@@ -86,7 +104,7 @@ namespace AiKnowledgeAssistant.Tests.Failures
                 FailureExplanationResult.Skipped("Token limit exceeded");
 
             _retrievalService
-                .Setup(r => r.FindSimilarAsync(query.SimilarFailures, It.IsAny<CancellationToken>()))
+                .Setup(r => r.FindSimilarAsync(query, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(failures);
 
             _insightBuilder
@@ -100,7 +118,7 @@ namespace AiKnowledgeAssistant.Tests.Failures
             var sut = CreateSut();
 
             // Act
-            var result = await sut.AnalyzeAsync(query, CancellationToken.None);
+            var result = await sut.AnalyzeAsync(request, CancellationToken.None);
 
             // Assert
             Assert.Same(insight, result.Insight);
@@ -112,7 +130,16 @@ namespace AiKnowledgeAssistant.Tests.Failures
         public async Task AnalyzeAsync_calls_dependencies_in_correct_sequence()
         {
             // Arrange
-            var query = CreateQuery();
+            // Arrange
+            var request = CreateQuery();
+
+            var query = new FindSimilarFailuresQuery(
+                    Environment: request.Environment,
+                    JobId: request.JobId,
+                    MinSeverity: request.MinSeverity,
+                    OnlyActive: request.OnlyActive,
+                    Question: request.Question
+                );
             var failures = new List<FailureRecord>();
             var insight = new FailureInsight();
 
@@ -120,7 +147,7 @@ namespace AiKnowledgeAssistant.Tests.Failures
 
             _retrievalService
                 .InSequence(sequence)
-                .Setup(r => r.FindSimilarAsync(query.SimilarFailures, It.IsAny<CancellationToken>()))
+                .Setup(r => r.FindSimilarAsync(query, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(failures);
 
             _insightBuilder
@@ -136,7 +163,7 @@ namespace AiKnowledgeAssistant.Tests.Failures
             var sut = CreateSut();
 
             // Act
-            await sut.AnalyzeAsync(query, CancellationToken.None);
+            await sut.AnalyzeAsync(request, CancellationToken.None);
 
             // Assert
             _retrievalService.VerifyAll();
@@ -147,17 +174,19 @@ namespace AiKnowledgeAssistant.Tests.Failures
         private static FailureAnalysisRequest CreateQuery()
         {
             var query = new FindSimilarFailuresQuery(
-                Content: "database timeout",
                 Environment: "Prod",
-                ServiceName: "JobWorker",
+                JobId: "1000",
                 MinSeverity: 2,
+                Question: "Is this severe?",
                 OnlyActive: true,
                 Top: 5);
 
             return new FailureAnalysisRequest()
             {
-                SimilarFailures = query,
-                Question = "Is this severe?"
+                Environment = query.Environment,
+                JobId = query.JobId,
+                MinSeverity = query.MinSeverity,
+                Question = query.Question,
             };
         }
     }

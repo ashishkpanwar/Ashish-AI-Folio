@@ -48,7 +48,7 @@ public sealed class FailureRetrievalService : IFailureRetrievalService
         var filters = new List<string>
         {
             $"environment eq '{query.Environment}'",
-            $"serviceName eq '{query.ServiceName}'",
+            $"jobId eq '{query.JobId}'",
             $"severity ge {query.MinSeverity}"
         };
 
