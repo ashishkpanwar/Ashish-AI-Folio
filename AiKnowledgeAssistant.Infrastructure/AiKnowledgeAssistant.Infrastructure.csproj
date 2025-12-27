@@ -17,4 +17,9 @@
     <PackageReference Include="Polly" Version="8.6.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\Interfaces\" />
+    <Folder Include="Repositories\Models\" />
+  </ItemGroup>
+
 </Project>
