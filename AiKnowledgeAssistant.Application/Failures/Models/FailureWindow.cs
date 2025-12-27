@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AiKnowledgeAssistant.Infrastructure.Repositories.Models;
+
 
 namespace AiKnowledgeAssistant.Application.Failures.Models
 {
@@ -8,7 +7,7 @@ namespace AiKnowledgeAssistant.Application.Failures.Models
     {
         public string WorkflowId { get; init; } = default!;
         public string Environment { get; init; } = default!;
-        public IEnumerable<Infrastructure.Repositories.Models.JobExecution> FailedJobs { get; init; } = default!;
+        public IEnumerable<JobExecution> FailedJobs { get; init; } = default!;
         public string? PreviousSuccessJobId { get; init; }
     }
 }

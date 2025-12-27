@@ -15,15 +15,15 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
 
         public async Task<FailureWindow> ResolveAsync(string jobId)
         {
-            var job = await _jobRepository.GetByIdAsync(jobId)
+            JobExecution job = await _jobRepository.GetByIdAsync(jobId)
                       ?? throw new InvalidOperationException($"Job '{jobId}' not found.");
 
             if (job.Status != JobStatus.Failed)
                 throw new InvalidOperationException("Failure window can only be resolved for failed jobs.");
 
-            var scopedJobs = await _jobRepository.GetByWorkflowAndEnvironmentAsync(
+            IReadOnlyList<JobExecution> scopedJobs = await _jobRepository.GetByWorkflowAndEnvironmentAsync(
                 job.WorkflowId,
-                job.Environment);
+                job.Environment); // this should include ExecutedAt filtering in the repository layer for performance
 
             var orderedJobs = scopedJobs
                 .Where(j => j.ExecutedAt <= job.ExecutedAt)
