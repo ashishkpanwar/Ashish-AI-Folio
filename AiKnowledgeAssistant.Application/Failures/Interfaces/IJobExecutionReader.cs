@@ -9,8 +9,11 @@ namespace AiKnowledgeAssistant.Infrastructure.Repositories.Interfaces
     {
         Task<JobExecution?> GetByIdAsync(string jobId);
 
-        Task<IReadOnlyList<JobExecution>> GetByWorkflowAndEnvironmentAsync(
-            string workflowId,
-            string environment);
+        Task<IReadOnlyList<JobExecution>> GetFailureWindowAsync(
+        string workflowId,
+        string environment,
+        DateTimeOffset fromTime,
+        TimeSpan maxLookback,
+        int maxJobs);
     }
 }

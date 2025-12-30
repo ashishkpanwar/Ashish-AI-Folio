@@ -39,7 +39,7 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
                     .Select(g => g.Key)
                     .ToList(),
 
-                Confidence = confidence
+                Confidence = confidence // this does not look right/helpful?
             };
         }
     }

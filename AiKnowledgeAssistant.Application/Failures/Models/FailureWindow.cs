@@ -8,6 +8,6 @@ namespace AiKnowledgeAssistant.Application.Failures.Models
         public string WorkflowId { get; init; } = default!;
         public string Environment { get; init; } = default!;
         public IEnumerable<JobExecution> FailedJobs { get; init; } = default!;
-        public string? PreviousSuccessJobId { get; init; }
+        public string? FirstFailedJob { get; init; }
     }
 }
