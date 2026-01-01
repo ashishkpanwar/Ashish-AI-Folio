@@ -9,7 +9,7 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
     public sealed class FailureOverviewService
     {
         private readonly IFailureWindowResolver _windowResolver;
-        private readonly IFailureRecordReader _failureRecordReader;
+        private readonly IFailureRecordReader _failureRecordReader; //like repository
         private readonly IFailureSummaryBuilder _summaryBuilder;
         private readonly IFailureAiSummaryGenerator _aiSummaryGenerator;
 
@@ -40,6 +40,7 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
             if (failedRecords.Count == 0)
                 throw new InvalidOperationException(
                     "Failure window resolved but no failure records found.");
+
             var jobFailureRecords =
                 failedRecords.Where(r => r.JobId == jobId).ToList();
 

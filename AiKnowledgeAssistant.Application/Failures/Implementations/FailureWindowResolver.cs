@@ -14,7 +14,7 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
             _jobExecutionReader = jobRepository;
         }
 
-        public async Task<FailureWindow> ResolveAsync(string jobId)
+        public async Task<FailureWindow> ResolveAsync(string jobId, int lookBack = 1, int maxJobs = 50)
         {
             JobExecution job = await _jobExecutionReader.GetByIdAsync(jobId)
                       ?? throw new InvalidOperationException($"Job '{jobId}' not found.");
@@ -22,17 +22,15 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
             if (job.Status != JobStatus.Failed)
                 throw new InvalidOperationException("Failure window can only be resolved for failed jobs.");
 
-            TimeSpan DefaultLookback =
-                TimeSpan.FromDays(1);
-
-            int DefaultMaxJobs = 50;
+            TimeSpan lookbackTime =
+                TimeSpan.FromDays(lookBack);
 
             IReadOnlyList<JobExecution> failedJobs = await _jobExecutionReader.GetFailureWindowAsync(
                     job.WorkflowId,
                     job.Environment,
                     job.ExecutedAt,
-                    DefaultLookback,
-                    DefaultMaxJobs); // this should include ExecutedAt filtering in the repository layer for performance
+                    lookbackTime,
+                    maxJobs); // this should include ExecutedAt filtering in the repository layer for performance
 
             if (failedJobs.Count == 0)
                 throw new InvalidOperationException(
@@ -44,7 +42,6 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
                 WorkflowId = job.WorkflowId,
                 Environment = job.Environment,
                 FailedJobs = failedJobs,
-                FirstFailedJob = firstFailedJob
             };
         }
     }
