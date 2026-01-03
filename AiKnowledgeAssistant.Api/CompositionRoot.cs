@@ -55,11 +55,7 @@ namespace AiKnowledgeAssistant.Api
             services.AddScoped<IAiEmbeddingClient, AzureOpenAiEmbeddingClient>();
             services.AddScoped<IFailureVectorStore, FailureVectorSearchStore>();
             services.AddScoped<IFailureRetrievalService, FailureRetrievalService>();
-            services.AddScoped<IFailureInsightBuilder, FailureInsightBuilder>();
             services.AddScoped<ITokenGuardrail, DefaultTokenGuardrail>();
-            services.AddScoped<IFailureExplanationService, FailureExplanationService>();
-            services.AddScoped<IFailureAnalysisService, FailureAnalysisService>();
-
         }
     }
 

@@ -7,6 +7,6 @@ namespace AiKnowledgeAssistant.Application.Failures.Interfaces
 {
     public interface IFailureWindowResolver
     {
-        Task<FailureWindow> ResolveAsync(string jobId);
+        Task<FailureWindow> ResolveAsync(string jobId, int lookBack = 1, int maxJobs = 50);
     }
 }
