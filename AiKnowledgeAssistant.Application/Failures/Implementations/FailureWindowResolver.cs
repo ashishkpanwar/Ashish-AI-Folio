@@ -35,7 +35,6 @@ namespace AiKnowledgeAssistant.Application.Failures.Implementations
             if (failedJobs.Count == 0)
                 throw new InvalidOperationException(
                     "Failure window resolution returned no failed jobs.");
-            var firstFailedJob = failedJobs.OrderByDescending(job => job.ExecutedAt).First().JobId;
 
             return new FailureWindow
             {
