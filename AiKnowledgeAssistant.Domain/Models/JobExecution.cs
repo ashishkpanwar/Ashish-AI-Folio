@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AiKnowledgeAssistant.Domain.Enums;
 
 namespace AiKnowledgeAssistant.Infrastructure.Repositories.Models
 {
@@ -11,11 +9,6 @@ namespace AiKnowledgeAssistant.Infrastructure.Repositories.Models
         public string Environment { get; init; } = default!;
         public JobStatus Status { get; init; }
         public DateTimeOffset ExecutedAt { get; init; }
-    }
-    public enum JobStatus
-    {
-        Success,
-        Failed
     }
 
 }

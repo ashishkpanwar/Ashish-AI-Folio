@@ -1,5 +1,6 @@
 ﻿using AiKnowledgeAssistant.Application.Failures.Interfaces;
 using AiKnowledgeAssistant.Application.Failures.Models;
+using AiKnowledgeAssistant.Domain.Enums;
 using AiKnowledgeAssistant.Infrastructure.Repositories.Interfaces;
 using AiKnowledgeAssistant.Infrastructure.Repositories.Models;
 
