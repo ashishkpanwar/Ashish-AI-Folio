@@ -3,6 +3,7 @@ using AiKnowledgeAssistant.Application.AI.Interfaces;
 using AiKnowledgeAssistant.Application.Failures;
 using AiKnowledgeAssistant.Application.Failures.Implementations;
 using AiKnowledgeAssistant.Application.Failures.Interfaces;
+using AiKnowledgeAssistant.Application.Failures.Models;
 using AiKnowledgeAssistant.Infrastructure.AI;
 using AiKnowledgeAssistant.Infrastructure.Persistence;
 using AiKnowledgeAssistant.Infrastructure.Search;
@@ -69,6 +70,8 @@ namespace AiKnowledgeAssistant.Api
             services.AddScoped<IFailureVectorStore, FailureVectorSearchStore>();
             services.AddScoped<IFailureRetrievalService, FailureRetrievalService>();
             services.AddScoped<ITokenGuardrail, DefaultTokenGuardrail>();
+            services.AddScoped<IFailureRecordReader, FailureRecord>
+            services.AddScoped<FailureOverviewService>();
         }
     }
 
